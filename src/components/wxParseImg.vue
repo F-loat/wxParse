@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getSysWH() {
-      //获取当前设备屏幕宽度和高度, 写在这里只是为了方便调试, 最好是写到 wxParse.vue 再传入
+      // 获取当前设备屏幕宽度和高度, 写在这里只是为了方便调试, 最好是写到 wxParse.vue 再传入
       wx.getSystemInfo({
         success: (res) => {
           this.realWindowWidth = res.windowWidth
@@ -50,9 +50,7 @@ export default {
         urls: this.node.imageUrls // 需要预览的图片http链接列表
       })
     },
-    /**
-     * 图片视觉宽高计算函数区
-     **/
+    // 图片视觉宽高计算函数区
     wxParseImgLoad(e) {
       const { src } = e.target.dataset
       if (!src) return
@@ -70,28 +68,23 @@ export default {
     },
     // 计算视觉优先的图片宽高
     wxAutoImageCal(originalWidth, originalHeight) {
-      //获取图片的原始长宽
-      var windowWidth = 0, windowHeight = 0
-      var autoWidth = 0, autoHeight = 0
-      var results = {}
-      var padding = this.node.imagePadding
-      windowWidth = this.realWindowWidth - 2 * padding
-      windowHeight = this.realWindowHeight
-      //判断按照那种方式进行缩放
-      // console.log('windowWidth' + windowWidth)
+      // 获取图片的原始长宽
+      const { imagePadding } = this.node
+      const windowWidth = this.realWindowWidth - 2 * imagePadding
+      const windowHeight = this.realWindowHeight
+      const results = {}
+
+      // 判断按照那种方式进行缩放
       if (originalWidth > windowWidth) {
-        //在图片width大于手机屏幕width时候
-        autoWidth = windowWidth
-        // console.log('autoWidth' + autoWidth)
-        autoHeight = autoWidth * originalHeight / originalWidth
-        // console.log('autoHeight' + autoHeight)
-        results.imageWidth = autoWidth
-        results.imageheight = autoHeight
+        // 在图片width大于手机屏幕width时候
+        results.imageWidth = windowWidth
+        results.imageheight = windowWidth * originalHeight / originalWidth
       } else {
-        //否则展示原来的数据
+        // 否则展示原来的数据
         results.imageWidth = originalWidth
         results.imageheight = originalHeight
       }
+      
       return results
     }
   }
