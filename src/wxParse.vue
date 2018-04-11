@@ -10,7 +10,7 @@
 <!--基础元素-->
 <div class="wxParse">
   <block v-for="node of wxParseData.nodes" :key="node.index">
-    <wxParseTemplate :node="node" />
+    <wxParseTemplate :node="node" :padding="wxParseData.view" />
   </block>
 </div>
 </template>

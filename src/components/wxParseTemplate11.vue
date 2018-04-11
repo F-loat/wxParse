@@ -23,12 +23,12 @@
 
     <!--video类型-->
     <block v-else-if="node.tag == 'video'">
-      <wx-parse-video :node="node" />
+      <wx-parse-video :node="node" :padding="padding" />
     </block>
 
     <!--img类型-->
     <block v-else-if="node.tag == 'img'">
-      <wx-parse-img :node="node" />
+      <wx-parse-img :node="node" :padding="padding" />
     </block>
 
     <!--a类型-->
@@ -70,7 +70,8 @@ import wxParseVideo from './wxParseVideo'
 export default {
   name: 'wxParseTemplate11',
   props: {
-    node: {}
+    node: {},
+    padding: {}
   },
   components: {
     wxParseImg,
