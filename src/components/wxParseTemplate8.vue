@@ -4,7 +4,7 @@
     <block v-if="node.tag == 'button'">
       <button type="default" size="mini">
         <block v-for="node of node.nodes" :key="node.index">
-          <wx-parse-template :node="node" />
+          <wx-parse-template :node="node" :padding="padding" />
         </block>
       </button>
     </block>
@@ -18,7 +18,7 @@
           </view>
           <view :class="node.classStr" class="li-text">
             <block v-for="node of node.nodes" :key="node.index">
-              <wx-parse-template :node="node" />
+              <wx-parse-template :node="node" :padding="padding" />
             </block>
           </view>
         </view>
@@ -27,19 +27,19 @@
 
     <!--video类型-->
     <block v-else-if="node.tag == 'video'">
-      <wx-parse-video :node="node" />
+      <wx-parse-video :node="node" :padding="padding" />
     </block>
 
     <!--img类型-->
     <block v-else-if="node.tag == 'img'">
-      <wx-parse-img :node="node" />
+      <wx-parse-img :node="node" :padding="padding" />
     </block>
 
     <!--a类型-->
     <block v-else-if="node.tag == 'a'">
       <view :class="node.classStr" class="inline a" :data-href="node.attr.href" :style="node.styleStr">
         <block v-for="node of node.nodes" :key="node.index">
-          <wx-parse-template :node="node" />
+          <wx-parse-template :node="node" :padding="padding" />
         </block>
       </view>
     </block>
@@ -53,7 +53,7 @@
     <block v-else-if="node.tagType == 'block' && node.tag !== 'script'">
       <view :class="[node.classStr, node.tag]" :style="node.styleStr">
         <block v-for="node of node.nodes" :key="node.index">
-          <wx-parse-template :node="node" />
+          <wx-parse-template :node="node" :padding="padding" />
         </block>
       </view>
     </block>
@@ -61,7 +61,7 @@
     <!--内联标签-->
     <view v-else-if="node.tagType == 'inline' && node.tag !== 'style'" :class="[node.classStr, node.tag]" class="inline" :style="node.styleStr">
       <block v-for="node of node.nodes" :key="node.index">
-        <wx-parse-template :node="node" />
+        <wx-parse-template :node="node" :padding="padding" />
       </block>
     </view>
 
@@ -81,7 +81,8 @@ import wxParseVideo from './wxParseVideo'
 export default {
   name: 'wxParseTemplate8',
   props: {
-    node: {}
+    node: {},
+    padding: {}
   },
   components: {
     wxParseTemplate,
