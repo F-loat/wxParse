@@ -10,7 +10,7 @@
 <!--基础元素-->
 <div class="wxParse">
   <block v-for="node of wxParseData.nodes" :key="node.index">
-    <wxParseTemplate :node="node" :padding="wxParseData.view" />
+    <wxParseTemplate :node="node" />
   </block>
 </div>
 </template>
@@ -53,10 +53,9 @@ export default {
   computed: {
     wxParseData() {
       const { content, imageMode, imagePadding, debug } = this
-      const transData = HtmlToJson(content, imageMode, debug);
-      if (debug) console.log(JSON.stringify(transData, ' ', ' '));
-      transData.view = { imagePadding };
-      return transData;
+      const transData = HtmlToJson(content, imageMode, imagePadding, debug)
+      if (debug) console.log(JSON.stringify(transData))
+      return transData
     }
   }
 }

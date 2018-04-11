@@ -65,7 +65,7 @@ function trimHtml(html) {
     .replace(/[ ]+</gi, '<');
 }
 
-function html2json(html, imageMode, debug) {
+function html2json(html, imageMode, imagePadding, debug) {
   //处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
@@ -149,6 +149,7 @@ function html2json(html, imageMode, debug) {
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
         node.attr.src = imgUrl || '';
         node.imageMode = imageMode;
+        node.imagePadding = imagePadding;
         node.imageUrls = results.imageUrls;
         if (imgUrl) {
           results.images.push(node);

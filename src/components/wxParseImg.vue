@@ -17,26 +17,25 @@ export default {
   data() {
     return {
       realWindowWidth: 0,
-        realWindowHeight: 0,
-        newstyleStr: ''
+      realWindowHeight: 0,
+      newstyleStr: ''
     };
   },
   props: {
-      node: {},
-      padding: {}
+    node: {}
   },
   mounted() {
       this.getSysWH();
   },
-    computed: {
-      fitstyleStr: function(){
-        if (this.$data.newstyleStr != ''){
-          return this.$data.newstyleStr;
-        }else{
-          this.node.styleStr;
-        }
+  computed: {
+    fitstyleStr() {
+      if (this.$data.newstyleStr !== '') {
+        return this.$data.newstyleStr;
+      } else {
+        this.node.styleStr;
       }
-    },
+    }
+  },
   methods: {
     getSysWH: function() {
       var that = this;
@@ -72,7 +71,7 @@ export default {
       var temImages = that.node;
       var recal = this.wxAutoImageCal(e.mp.detail.width, e.mp.detail.height,that); 
       var index = temImages.index;
-      this.$data.newstyleStr = "height:" + recal.imageheight + "px; width:" + recal.imageWidth + "px; padding: 0 " + this.padding.imagePadding + "px;";
+      this.$data.newstyleStr = "height:" + recal.imageheight + "px; width:" + recal.imageWidth + "px; padding: 0 " + this.node.imagePadding + "px;";
     },
 
     // 计算视觉优先的图片宽高
@@ -81,7 +80,7 @@ export default {
       var windowWidth = 0, windowHeight = 0;
       var autoWidth = 0, autoHeight = 0;
       var results = {};
-      var padding = this.padding.imagePadding;
+      var padding = this.node.imagePadding;
       windowWidth = that.$data.realWindowWidth - 2 * padding;
       windowHeight = that.$data.realWindowHeight;
       //判断按照那种方式进行缩放
