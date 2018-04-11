@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       realWindowWidth: 0,
-      realWindowHeigth: 0
+      realWindowHeight: 0
     };
   },
   props: {
@@ -33,7 +33,7 @@ export default {
       wx.getSystemInfo({
         success: function(res) {
           that.$data.realWindowWidth = res.windowWidth;
-          that.$data.realWindowHeigth = res.windowHeigth;
+          that.$data.realWindowHeight = res.windowHeight;
         }
       });
     },
