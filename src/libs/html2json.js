@@ -65,7 +65,7 @@ function trimHtml(html) {
     .replace(/[ ]+</gi, '<');
 }
 
-function html2json(html, imageMode, imagePadding, debug) {
+function html2json(html, image, debug) {
   //处理字符串
   html = removeDOCTYPE(html);
   html = trimHtml(html);
@@ -78,6 +78,9 @@ function html2json(html, imageMode, imagePadding, debug) {
     imageUrls: []
   };
   var index = 0;
+  
+  image.urls = results.imageUrls;
+
   HTMLParser(html, {
     start: function (tag, attrs, unary) {
       // node for this element
@@ -148,9 +151,7 @@ function html2json(html, imageMode, imagePadding, debug) {
         var imgUrl = node.attr.src;
         imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
         node.attr.src = imgUrl || '';
-        node.imageMode = imageMode;
-        node.imagePadding = imagePadding;
-        node.imageUrls = results.imageUrls;
+        node.image = image;
         if (imgUrl) {
           results.images.push(node);
           results.imageUrls.push(imgUrl);
@@ -161,7 +162,6 @@ function html2json(html, imageMode, imagePadding, debug) {
       if (node.tag === 'a') {
         node.attr.href = node.attr.href || ''
       }
-
 
       // 处理font标签样式属性
       if (node.tag === 'font') {

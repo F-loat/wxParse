@@ -1,7 +1,8 @@
 <template>
   <image
     class="img"
-    :mode="node.imageMode"
+    :mode="node.image.mode"
+    :lazy-load="node.image.lazyLoad"
     :class="node.classStr"
     :style="fitStyleStr"
     :data-src="node.attr.src"
@@ -22,7 +23,12 @@ export default {
     }
   },
   props: {
-    node: {}
+    node: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
   },
   mounted() {
     this.getSysWH()
@@ -47,7 +53,7 @@ export default {
       if (!src) return
       wx.previewImage({
         current: src, // 当前显示图片的http链接
-        urls: this.node.imageUrls // 需要预览的图片http链接列表
+        urls: this.node.image.urls // 需要预览的图片http链接列表
       })
     },
     // 图片视觉宽高计算函数区
@@ -63,14 +69,14 @@ export default {
       const { width, height } = e.mp.detail
       const recal = this.wxAutoImageCal(width, height)
       const { imageheight, imageWidth } = recal
-      const { imagePadding } = this.node
-      this.newStyleStr = `height: ${imageheight}px; width: ${imageWidth}px; padding: 0 ${imagePadding}px;`
+      const { padding } = this.node.image
+      this.newStyleStr = `height: ${imageheight}px; width: ${imageWidth}px; padding: 0 ${padding}px;`
     },
     // 计算视觉优先的图片宽高
     wxAutoImageCal(originalWidth, originalHeight) {
       // 获取图片的原始长宽
-      const { imagePadding } = this.node
-      const windowWidth = this.realWindowWidth - 2 * imagePadding
+      const { padding } = this.node.image
+      const windowWidth = this.realWindowWidth - 2 * padding
       const windowHeight = this.realWindowHeight
       const results = {}
 

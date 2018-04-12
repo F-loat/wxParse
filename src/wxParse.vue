@@ -28,16 +28,14 @@ export default {
         return '<div class="color:red;">数据不能为空</div>'
       }
     },
-    imageMode: {
+    image: {
       type: String,
       default() {
-        return 'aspectFit'
-      }
-    },
-    imagePadding: {
-      type: Number,
-      default() {
-        return 0
+        return {
+          mode: 'aspectFit',
+          padding: 0,
+          lazyLoad: false
+        }
       }
     },
     debug: {
@@ -52,9 +50,9 @@ export default {
   },
   computed: {
     wxParseData() {
-      const { content, imageMode, imagePadding, debug } = this
-      const transData = HtmlToJson(content, imageMode, imagePadding, debug)
-      if (debug) console.log(JSON.stringify(transData))
+      const { content, image, debug } = this
+      const transData = HtmlToJson(content, image, debug)
+      if (debug) console.log(JSON.stringify(transData, null, ' '))
       return transData
     }
   }
