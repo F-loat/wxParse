@@ -1,6 +1,6 @@
 {
   "name": "mpvue-wxparse",
-  "version": "0.4.11",
+  "version": "0.5.0",
   "description": "适用于 Mpvue 的微信小程序富文本解析自定义组件，支持HTML及markdown解析",
   "main": "src/wxParse.vue",
   "scripts": {
