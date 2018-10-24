@@ -37,6 +37,8 @@ function strNumDiscode(str) {
   str = str.replace(/&otimes;/g, '⊗');
   str = str.replace(/&perp;/g, '⊥');
   str = str.replace(/&sdot;/g, '⋅');
+  str = str.replace(/&plusmn;/g, "±");
+  str = str.replace(/&divide;/g, "÷");
   return str;
 }
 
