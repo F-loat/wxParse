@@ -45,7 +45,8 @@ export default {
       const { padding, mode } = this.node.attr;
       const { styleStr } = this.node;
       const imageHeightStyle = mode === 'widthFix' ? '' : `height: ${imageheight}px; !important`;
-      this.newStyleStr = `${styleStr}; ${imageHeightStyle}; width: ${imageWidth}px; padding: 0 ${+padding}px;`;
+      // this.newStyleStr = `${styleStr}; ${imageHeightStyle}; width: ${imageWidth}px; padding: 0 ${+padding}px;`;
+      this.newStyleStr = `${styleStr ? styleStr : styleStr+';'}${imageHeightStyle}; width: ${imageWidth === '100%' ? imageWidth : imageWidth + 'px'}; padding: 0 ${+padding}px;`;
     },
     // 计算视觉优先的图片宽高
     wxAutoImageCal(originalWidth, originalHeight) {
@@ -63,7 +64,8 @@ export default {
       // 判断按照那种方式进行缩放
       if (originalWidth > windowWidth) {
         // 在图片width大于手机屏幕width时候
-        results.imageWidth = windowWidth;
+        // results.imageWidth = windowWidth;
+        results.imageWidth = '100%';
         results.imageheight = windowWidth * (originalHeight / originalWidth);
       } else {
         // 否则展示原来的数据
